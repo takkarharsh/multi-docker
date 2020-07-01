@@ -1,0 +1,16 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t takkarharsh/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true takkarharsh/react-test npm run test
+
+after_success:
+  - docker build -t takkarharsh/multi-client ./client
+  - docker build -t takkarharsh/multi-api ./server
+  - docker build -t takkarharsh/multi-worker ./worker
+  - docker build -t takkarharsh/multi-nginx ./nginx
