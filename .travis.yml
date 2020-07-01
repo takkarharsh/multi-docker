@@ -14,3 +14,4 @@ after_success:
   - docker build -t takkarharsh/multi-api ./server
   - docker build -t takkarharsh/multi-worker ./worker
   - docker build -t takkarharsh/multi-nginx ./nginx
+  - docker images
